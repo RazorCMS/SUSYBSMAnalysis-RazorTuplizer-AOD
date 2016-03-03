@@ -6,18 +6,18 @@ Razor ntuplizer for running over LHC Run 2 miniAOD
 Instructions for compiling in CMSSW
 --------------
 
-    cmsrel CMSSW_7_4_7
-    cd CMSSW_7_4_7/src
+    cmsrel CMSSW_7_6_3
+    cd CMSSW_7_6_3/src
     cmsenv
-    git clone git@github.com:RazorCMS/SUSYBSMAnalysis-RazorTuplizer SUSYBSMAnalysis/RazorTuplizer
+    git clone git@github.com:RazorCMS/SUSYBSMAnalysis-RazorTuplizer-AOD SUSYBSMAnalysisAOD/RazorTuplizer
     scram b
     
 Running the ntuplizer
 --------------
 
-    cmsRun python/razorTuplizer.py
+    cmsRun python/razorTuplizer_MC_25ns.py
     
-Before running, check python/razorTuplizer.py to make sure that the correct global tag is defined. (process.GlobalTag.globaltag = ...)
+Before running, check python/razorTuplizer_MC_25ns.py to make sure that the correct global tag is defined. (process.GlobalTag.globaltag = ...)
 
 To run using CRAB3:
 
