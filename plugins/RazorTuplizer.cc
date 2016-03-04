@@ -1144,18 +1144,18 @@ bool RazorTuplizer::fillPhotons(const edm::Event& iEvent, const edm::EventSetup&
 
     //phoE[nPhotons] = pho.getCorrectedEnergy(reco::Photon::P4type::ecal_standard);
     phoPt[nPhotons] = pho.pt();
-    //phoEta[nPhotons] = pho.eta(); //correct this for the vertex
-    //phoPhi[nPhotons] = pho.phi(); //correct this for the vertex
+    phoEta[nPhotons] = pho.eta(); //correct this for the vertex
+    phoPhi[nPhotons] = pho.phi(); //correct this for the vertex
 
     //phoSigmaIetaIeta[nPhotons] = pho.see();
     phoFull5x5SigmaIetaIeta[nPhotons] = pho.full5x5_sigmaIetaIeta();
 
-    //phoR9[nPhotons] = pho.r9();
+    phoR9[nPhotons] = pho.r9();
     //Use the noZS version of this according to Emanuele
     phoR9[nPhotons] = pho.full5x5_r9();
 
     pho_HoverE[nPhotons] = pho.hadTowOverEm();
-    //pho_isConversion[nPhotons] = pho.hasConversionTracks();
+    pho_isConversion[nPhotons] = pho.hasConversionTracks();
     //pho_passEleVeto[nPhotons] = !hasMatchedPromptElectron(pho.superCluster(),electrons,conversions, beamSpot->position());
 
     //Don't use default miniAOD quantities for now
@@ -1167,34 +1167,36 @@ bool RazorTuplizer::fillPhotons(const edm::Event& iEvent, const edm::EventSetup&
     //Compute PF isolation
     //absolute uncorrected isolations with footprint removal
     //**********************************************************
-    //const float coneSizeDR = 0.3;
+    /*
+    const float coneSizeDR = 0.3;
     //const float dxyMax = 0.1;
     //const float dzMax = 0.2;
     //float chargedIsoSum = 0;
     //float neutralHadronIsoSum = 0;
     //float photonIsoSum = 0;
-    //
+    
     //// First, find photon direction with respect to the good PV
-    //math::XYZVector photon_directionWrtVtx(pho.superCluster()->x() - myPV->x(),
-    //                                       pho.superCluster()->y() - myPV->y(),
-    //                                       pho.superCluster()->z() - myPV->z());
+    math::XYZVector photon_directionWrtVtx(pho.superCluster()->x() - myPV->x(),
+                                           pho.superCluster()->y() - myPV->y(),
+                                           pho.superCluster()->z() - myPV->z());
     //// Loop over all PF candidates
-    //for (const pat::PackedCandidate &candidate : *packedPFCands) {
-    //
-    //  // Check if this candidate is within the isolation cone
-    //  float dR=deltaR(photon_directionWrtVtx.Eta(),photon_directionWrtVtx.Phi(),
-    //                  candidate.eta(), candidate.phi());
-    //  if( dR > coneSizeDR ) continue;
-    //
-    //  // Check if this candidate is not in the footprint
-    //  bool inFootprint = false;
-    //  for (auto itr : pho.associatedPackedPFCandidates()) {
-    //    if ( &(*itr) == &candidate) {
-    //      inFootprint = true;
-    //    }
-    //  }
-    //  if( inFootprint ) continue;
-    //
+    for (const pat::PackedCandidate &candidate : *packedPFCands) {
+      //  // Check if this candidate is within the isolation cone
+      float dR=deltaR(photon_directionWrtVtx.Eta(),photon_directionWrtVtx.Phi(),
+                      candidate.eta(), candidate.phi());
+      if( dR > coneSizeDR ) continue;
+      
+      //  // Check if this candidate is not in the footprint
+      bool inFootprint = false;
+      for (auto itr : pho.associatedPackedPFCandidates()) {
+        if ( &(*itr) == &candidate) {
+          inFootprint = true;
+        }
+      }
+      if( inFootprint ) continue;
+
+    */
+      //
     //
     //  // Find candidate type
     //  reco::PFCandidate::ParticleType thisCandidateType = reco::PFCandidate::X;
