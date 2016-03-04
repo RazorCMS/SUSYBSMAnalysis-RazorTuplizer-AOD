@@ -58,10 +58,10 @@ using namespace std;
 //#include "DataFormats/METReco/interface/HcalNoiseSummary.h"
 //#include "DataFormats/Candidate/interface/VertexCompositePtrCandidate.h"
 //#include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
-#include "SUSYBSMAnalysis/RazorTuplizer/interface/EGammaMvaEleEstimatorCSA14.h"
-#include "SUSYBSMAnalysis/RazorTuplizer/interface/ElectronMVAEstimatorRun2NonTrig.h"
+#include "SUSYBSMAnalysisAOD/RazorTuplizer/interface/EGammaMvaEleEstimatorCSA14.h"
+#include "SUSYBSMAnalysisAOD/RazorTuplizer/interface/ElectronMVAEstimatorRun2NonTrig.h"
 //#include "RecoEcal/EgammaCoreTools/interface/EcalClusterLazyTools.h"
-#include "SUSYBSMAnalysis/RazorTuplizer/interface/EGammaMvaPhotonEstimator.h"
+#include "SUSYBSMAnalysisAOD/RazorTuplizer/interface/EGammaMvaPhotonEstimator.h"
 
 //ROOT includes
 #include "TTree.h"

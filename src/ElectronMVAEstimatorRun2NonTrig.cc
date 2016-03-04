@@ -1,5 +1,5 @@
 #include <TFile.h>
-#include "SUSYBSMAnalysis/RazorTuplizer/interface/ElectronMVAEstimatorRun2NonTrig.h"
+#include "SUSYBSMAnalysisAOD/RazorTuplizer/interface/ElectronMVAEstimatorRun2NonTrig.h"
 #include <cmath>
 #include <vector>
 
