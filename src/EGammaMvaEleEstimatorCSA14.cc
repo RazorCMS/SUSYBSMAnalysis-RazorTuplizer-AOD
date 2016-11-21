@@ -1,5 +1,5 @@
 #include <TFile.h>
-#include "SUSYBSMAnalysisAOD/RazorTuplizer/interface/EGammaMvaEleEstimatorCSA14.h"
+#include "SUSYBSMAnalysis/RazorTuplizer/interface/EGammaMvaEleEstimatorCSA14.h"
 #include <cmath>
 #include <vector>
 
