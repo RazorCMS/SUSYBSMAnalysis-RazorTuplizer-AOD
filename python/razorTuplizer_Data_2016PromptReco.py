@@ -11,10 +11,10 @@ process.load("Configuration.EventContent.EventContent_cff")
 #load input files
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-	'/store/data/Run2016H/DoubleEG/AOD/PromptReco-v2/000/281/613/00000/18DB1C73-D384-E611-81DD-02163E014708.root'
+	'root://cms-xrd-global.cern.ch///store/data/Run2016H/DoubleEG/AOD/PromptReco-v2/000/281/613/00000/18DB1C73-D384-E611-81DD-02163E014708.root'
    )
 )
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
 process.MessageLogger.cerr.FwkReport.reportEvery = 100
 
 #TFileService for output 
@@ -30,9 +30,7 @@ process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 
 #------ Declare the correct global tag ------#
 
-
-#process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_v3'
-process.GlobalTag.globaltag = '81X_upgrade2023_realistic_v3'
+process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v14'
 
 #------ If we add any inputs beyond standard miniAOD event content, import them here ------#
 
@@ -55,8 +53,8 @@ process.GlobalTag.globaltag = '81X_upgrade2023_realistic_v3'
 
 #list input collections
 process.ntuples = cms.EDAnalyzer('RazorTuplizer', 
-    isData = cms.bool(False),    
-    useGen = cms.bool(True),
+    isData = cms.bool(True),    
+    useGen = cms.bool(False),
     isFastsim = cms.bool(False),
     enableTriggerInfo = cms.bool(True),                                 
     triggerPathNamesFile = cms.string("SUSYBSMAnalysis/RazorTuplizer/data/RazorHLTPathnames.dat"),
@@ -64,8 +62,8 @@ process.ntuples = cms.EDAnalyzer('RazorTuplizer',
     muonHLTFilterNamesFile = cms.string("SUSYBSMAnalysis/RazorTuplizer/data/RazorMuonHLTFilterNames.dat"),
     photonHLTFilterNamesFile = cms.string("SUSYBSMAnalysis/RazorTuplizer/data/RazorPhotonHLTFilterNames.dat"),
 
-    vertices = cms.InputTag("offlinePrimaryVertices4D"), # for timing case
-    #vertices = cms.InputTag("offlinePrimaryVerticesWithBS"),  # for non-timing case
+    #vertices = cms.InputTag("offlinePrimaryVertices4D"), # for timing case
+    vertices = cms.InputTag("offlinePrimaryVerticesWithBS"),  # for non-timing case
     
     muons = cms.InputTag("muons"),
     electrons = cms.InputTag("gedGsfElectrons"),
@@ -88,7 +86,7 @@ process.ntuples = cms.EDAnalyzer('RazorTuplizer',
     genJets = cms.InputTag("ak4GenJets"),
 
     triggerBits = cms.InputTag("TriggerResults","","HLT"),
-    hepMC = cms.InputTag("generatorSmeared", "", "SIM"),
+    #hepMC = cms.InputTag("generatorSmeared", "", "SIM"),
     
     #triggerPrescales = cms.InputTag("patTrigger"),
     
@@ -110,7 +108,7 @@ process.ntuples = cms.EDAnalyzer('RazorTuplizer',
     trackTime = cms.InputTag("trackTimeValueMapProducer","generalTracksConfigurableFlatResolutionModel"),
     trackTimeReso = cms.InputTag("trackTimeValueMapProducer","generalTracksConfigurableFlatResolutionModelResolution"),
 
-    puInfo = cms.InputTag("slimmedAddPileupInfo", "", "RECO"), #uncomment if no pre-mixing
+    puInfo = cms.InputTag("addPileupInfo", "", "HLT"), #uncomment if no pre-mixing
     #puInfo = cms.InputTag("mixData", "", "HLT"), #uncomment for samples with pre-mixed pileup
     #hcalNoiseInfo = cms.InputTag("hcalnoise", "", "RECO"),
 
@@ -125,11 +123,11 @@ process.ntuples = cms.EDAnalyzer('RazorTuplizer',
     rhoFastjetCentralNeutral = cms.InputTag("fixedGridRhoFastjetCentralNeutral", "", "RECO"),
 
     beamSpot = cms.InputTag("offlineBeamSpot", "", "RECO"),
-    pfClusters = cms.InputTag("particleFlowClusterECAL","","RECO"),
+    #pfClusters = cms.InputTag("particleFlowClusterECAL","","RECO"),
     #ebRecHits = cms.InputTag("reducedEgamma", "reducedEBRecHits", "RECO"),
-    ebRecHits = cms.InputTag("ecalRecHit", "EcalRecHitsEB", "RECO"),
-    eeRecHits = cms.InputTag("ecalRecHit", "EcalRecHitsEE", "RECO"),
-    esRecHits = cms.InputTag("ecalRecHit", "EcalRecHitsES", "RECO"),
+    ebRecHits = cms.InputTag("reducedEcalRecHitsEB", "", "RECO"),
+    eeRecHits = cms.InputTag("reducedEcalRecHitsEE", "", "RECO"),
+    esRecHits = cms.InputTag("reducedEcalRecHitsES", "", "RECO"),
     #ebeeClusters = cms.InputTag("reducedEgamma", "reducedEBEEClusters", "RECO"),
     ebeeClusters = cms.InputTag("particleFlowEGamma", "EBEEClusters", "RECO"),
     esClusters = cms.InputTag("particleFlowEGamma", "ESClusters", "RECO"),
