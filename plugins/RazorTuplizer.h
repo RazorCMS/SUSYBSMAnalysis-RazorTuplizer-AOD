@@ -213,12 +213,12 @@ protected:
   edm::EDGetTokenT<reco::PFJetCollection> jetsPuppiToken_;
   edm::EDGetTokenT<reco::PFJetCollection> jetsAK8Token_;
   edm::EDGetTokenT<reco::PFCandidateCollection> PFCandsToken_;
-  edm::EDGetTokenT<reco::PFClusterCollection> PFClustersToken_;
+//  edm::EDGetTokenT<reco::PFClusterCollection> PFClustersToken_;
 //  edm::EDGetTokenT<edm::View<reco::GenParticle> > prunedGenParticlesToken_;
   edm::EDGetTokenT<reco::GenParticleCollection> genParticlesToken_;
   edm::EDGetTokenT<reco::GenJetCollection> genJetsToken_;
   edm::EDGetTokenT<edm::TriggerResults> triggerBitsToken_;
-  edm::EDGetTokenT<edm::HepMCProduct> hepMCToken_;
+//  edm::EDGetTokenT<edm::HepMCProduct> hepMCToken_;
 //  edm::EDGetTokenT<pat::TriggerObjectStandAloneCollection> triggerObjectsToken_;
 //  edm::EDGetTokenT<pat::PackedTriggerPrescales> triggerPrescalesToken_;
   edm::EDGetTokenT<reco::PFMETCollection> metToken_;
@@ -260,7 +260,7 @@ protected:
   
   //EDM handles for each miniAOD input object
   edm::Handle<edm::TriggerResults> triggerBits;
-  edm::Handle<edm::HepMCProduct> hepMC;
+//  edm::Handle<edm::HepMCProduct> hepMC;
 //  edm::Handle<pat::TriggerObjectStandAloneCollection> triggerObjects;
 //  edm::Handle<pat::PackedTriggerPrescales> triggerPrescales;
   edm::Handle<edm::TriggerResults> metFilterBits;
@@ -269,7 +269,7 @@ protected:
   edm::Handle<edm::ValueMap<float> > times;
   edm::Handle<edm::ValueMap<float> > timeResos;
   edm::Handle<reco::PFCandidateCollection> pfCands;
-  edm::Handle<reco::PFClusterCollection> pfClusters;
+//  edm::Handle<reco::PFClusterCollection> pfClusters;
   edm::Handle<reco::MuonCollection> muons;
   edm::Handle<reco::GsfElectronCollection> electrons;
   edm::Handle<reco::PhotonCollection> photons;

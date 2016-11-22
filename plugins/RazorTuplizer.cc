@@ -30,13 +30,13 @@ RazorTuplizer::RazorTuplizer(const edm::ParameterSet& iConfig):
   jetsPuppiToken_(consumes<reco::PFJetCollection>(iConfig.getParameter<edm::InputTag>("jetsPuppi"))),
   jetsAK8Token_(consumes<reco::PFJetCollection>(iConfig.getParameter<edm::InputTag>("jetsAK8"))),
   PFCandsToken_(consumes<reco::PFCandidateCollection>(iConfig.getParameter<edm::InputTag>("pfCands"))),
-  PFClustersToken_(consumes<reco::PFClusterCollection>(iConfig.getParameter<edm::InputTag>("pfClusters"))),
+//  PFClustersToken_(consumes<reco::PFClusterCollection>(iConfig.getParameter<edm::InputTag>("pfClusters"))),
   //genParticlesToken_(consumes<edm::View<reco::GenParticle> >(iConfig.getParameter<edm::InputTag>("genParticles"))),
   //genParticlesToken_(consumes<edm::View<pat::PackedGenParticle> >(iConfig.getParameter<edm::InputTag>("genParticles"))),
   genParticlesToken_(consumes<reco::GenParticleCollection>(iConfig.getParameter<edm::InputTag>("genParticles"))),
   genJetsToken_(consumes<reco::GenJetCollection>(iConfig.getParameter<edm::InputTag>("genJets"))),
   triggerBitsToken_(consumes<edm::TriggerResults>(iConfig.getParameter<edm::InputTag>("triggerBits"))),
-  hepMCToken_(consumes<edm::HepMCProduct>(iConfig.getParameter<edm::InputTag>("hepMC"))),
+  //hepMCToken_(consumes<edm::HepMCProduct>(iConfig.getParameter<edm::InputTag>("hepMC"))),
   //triggerObjectsToken_(consumes<pat::TriggerObjectStandAloneCollection>(iConfig.getParameter<edm::InputTag>("triggerObjects"))),
   //triggerPrescalesToken_(consumes<pat::PackedTriggerPrescales>(iConfig.getParameter<edm::InputTag>("triggerPrescales"))),     
   metToken_(consumes<reco::PFMETCollection>(iConfig.getParameter<edm::InputTag>("mets"))),
@@ -711,7 +711,7 @@ void RazorTuplizer::enableGenParticleBranches(){
 void RazorTuplizer::loadEvent(const edm::Event& iEvent){
   //load all miniAOD objects for the current event
   iEvent.getByToken(triggerBitsToken_, triggerBits);
-  iEvent.getByToken(hepMCToken_, hepMC);
+//  iEvent.getByToken(hepMCToken_, hepMC);
 //  iEvent.getByToken(triggerObjectsToken_, triggerObjects);
 //  iEvent.getByToken(triggerPrescalesToken_, triggerPrescales);
   iEvent.getByToken(metFilterBitsToken_, metFilterBits);
@@ -720,7 +720,7 @@ void RazorTuplizer::loadEvent(const edm::Event& iEvent){
   iEvent.getByToken(trackTimeTag_,times);
   iEvent.getByToken(trackTimeResoTag_,timeResos);
   iEvent.getByToken(PFCandsToken_, pfCands);
-  iEvent.getByToken(PFClustersToken_, pfClusters);
+//  iEvent.getByToken(PFClustersToken_, pfClusters);
   iEvent.getByToken(muonsToken_, muons);
   iEvent.getByToken(electronsToken_, electrons);
   iEvent.getByToken(photonsToken_, photons);
@@ -1207,12 +1207,12 @@ bool RazorTuplizer::fillPVAll() {
     pvAllX[ipv] = vtx.x();
     pvAllY[ipv] = vtx.y();
     pvAllZ[ipv] = vtx.z();
-    pvAllT[ipv] = vtx.t();
+//    pvAllT[ipv] = vtx.t();
     
     pvAllXError[ipv] = vtx.xError();
     pvAllYError[ipv] = vtx.yError();
     pvAllZError[ipv] = vtx.zError();
-    pvAllTError[ipv] = vtx.tError();
+//    pvAllTError[ipv] = vtx.tError();
 
 
   }
@@ -1261,9 +1261,9 @@ bool RazorTuplizer::fillPVAll() {
   //for tracks: https://github.com/lgray/cmssw/blob/muon_iso_timing/TimingAnalysis/MuonIsoTiming/plugins/MuonIsoTiming.cc#L278
   //
   
-  bool passDeltaTcut = false;
+ // bool passDeltaTcut = false;
 
-  const reco::Vertex &vtx_ipvmin = vertices->at(ipvmin);
+//  const reco::Vertex &vtx_ipvmin = vertices->at(ipvmin);
   
   //auto ref = pfcand.trackRef();
  
@@ -1271,7 +1271,8 @@ bool RazorTuplizer::fillPVAll() {
   //auto ref = tracks->refAt(i);
    //std::cout<<"PFcand here......"<<std::endl;
 //    if(times->find(pfcand.trackRef())!=times->end())
-    if(times->contains(pfcand.trackRef().id()))
+/* 
+   if(times->contains(pfcand.trackRef().id()))
      {
      const float time = (*times)[pfcand.trackRef()];
      const float timeReso = (*timeResos)[pfcand.trackRef()] != 0.f ? (*timeResos)[pfcand.trackRef()] : 0.170f;	
@@ -1283,13 +1284,15 @@ bool RazorTuplizer::fillPVAll() {
 	   } 
 	}
       }
-  //  }
-    if (passDeltaTcut) {
+*/  
+//  }
+  /* 
+   if (passDeltaTcut) {
       pvAllSumPtSqD_dt[ipvmin] += pfcand.pt()*pfcand.pt();
       pvAllSumPxD_dt[ipvmin] += pfcand.px();
       pvAllSumPyD_dt[ipvmin] += pfcand.py();
     }
-    
+    */
  
   }
   
@@ -1891,12 +1894,13 @@ bool RazorTuplizer::fillPhotons(const edm::Event& iEvent, const edm::EventSetup&
     pho_superClusterSeedY[nPhotons]      = pho.superCluster()->seed()->y();
     pho_superClusterSeedZ[nPhotons]      = pho.superCluster()->seed()->z();
   
-    for (const reco::PFCluster &pfcluster : *pfClusters) {
+/*    for (const reco::PFCluster &pfcluster : *pfClusters) {
 	if(pfcluster.seed() == pho.superCluster()->seed()->seed())
 	{
 	pho_superClusterSeedT[nPhotons] = pfcluster.time();
 	}
     } 
+*/
 
     //Detector DetId_this = pho.superCluster()->seed()->seed();
  
@@ -2307,12 +2311,12 @@ bool RazorTuplizer::fillMC(){
     }
      
     //save genVertex time info
-    const HepMC::GenEvent *this_mc = hepMC->GetEvent();
+//    const HepMC::GenEvent *this_mc = hepMC->GetEvent();
 
-    auto origin_vtx = (*this_mc->vertices_begin())->position();
+//    auto origin_vtx = (*this_mc->vertices_begin())->position();
     //xyz0Ptr->SetXYZ(origin.x() * mmToCm, origin.y() * mmToCm, origin.z() * mmToCm);
     //*t0Ptr = origin.t() * mmToNs;
-    genVertexT = origin_vtx.t();
+//    genVertexT = origin_vtx.t();
  
     genWeight = genInfo->weight();
     genSignalProcessID = genInfo->signalProcessID();
