@@ -11,7 +11,7 @@ process.load("Configuration.EventContent.EventContent_cff")
 #load input files
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-	'/store/mc/RunIISpring16DR80/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/AODSIM/PUSpring16_80X_mcRun2_asymptotic_2016_v3_ext1-v1/80001/7C7A7CFD-B4FC-E511-9861-14187740D279.root'
+	'/store/data/Run2016B/DoubleEG/AOD/23Sep2016-v1/100000/225CDA2E-8687-E611-B2E8-FA163E32D4F3.root'
    )
 )
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
