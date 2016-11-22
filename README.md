@@ -1,14 +1,14 @@
 SUSYBSMAnalysis-RazorTuplizer
 =============================
 
-Razor ntuplizer for running over LHC Run 2 AOD compatible with CMSSW_8_1_pre15
+Razor ntuplizer for running over LHC Run 2 AOD compatible with CMSSW_8_0_12
 
 -----------------------------------
 Instructions for compiling in CMSSW
 -----------------------------------
 
-    cmsrel CMSSW_8_1_pre15
-    cd CMSSW_8_1_pre15/src
+    cmsrel CMSSW_8_0_12
+    cd CMSSW_8_0_12/src
     cmsenv
     git clone git@github.com:RazorCMS/SUSYBSMAnalysis-RazorTuplizer-AOD.git SUSYBSMAnalysis/RazorTuplizer
     scram b
