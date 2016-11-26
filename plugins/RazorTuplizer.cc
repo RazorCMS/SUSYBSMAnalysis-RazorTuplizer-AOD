@@ -1201,7 +1201,8 @@ bool RazorTuplizer::fillEventInfo(const edm::Event& iEvent){
 bool RazorTuplizer::fillPVAll() {
   
   nPVAll = std::min(int(vertices->size()),int(MAX_NPV));
-  
+ 
+   
   for (int ipv = 0; ipv < nPVAll; ++ipv) {
     const reco::Vertex &vtx = vertices->at(ipv);
     pvAllX[ipv] = vtx.x();
@@ -1239,12 +1240,15 @@ bool RazorTuplizer::fillPVAll() {
   //for (const reco::PFCandidate &pfcand : *pfCands) {
   for (const reco::PFCandidate &pfcand : *pfCands) {
     if (pfcand.charge()==0) continue;
+    if(pfcand.trackRef().isNull()) continue;
+
     double mindz = std::numeric_limits<double>::max();
     int ipvmin = -1;
     for (int ipv = 0; ipv < nPVAll; ++ipv) {
       const reco::Vertex &vtx = vertices->at(ipv);
       //double dz = std::abs(pfcand.dz(vtx.position()));
-      double dz = std::abs(pfcand.vz()-vtx.z());
+      //double dz = std::abs(pfcand.vz()-vtx.z());
+      double dz = std::abs(pfcand.trackRef()->dz(vtx.position()));
       if (dz<mindz) {
         mindz = dz;
         ipvmin = ipv;
